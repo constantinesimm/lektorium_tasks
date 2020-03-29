@@ -3,7 +3,6 @@ module.exports = (app) => {
   const io = require('socket.io')(server);
 
   let usersList = [];
-  let currentAdmin;
 
   io.on('connection', socket => {
       socket.username = 'Anonymous';
