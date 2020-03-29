@@ -23,14 +23,21 @@
             <div class="card-title text-primary">
               <i class="far fa-comments"></i> Simple Chat with Socket.io
             </div>
-            <button id="chat__clear_data" class="btn btn-sm btn-outline-danger"  data-toggle="modal" data-target="#chat__clear_confirm">
+            <button id="chat__clear_data" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#chat__clear_confirm">
               <i class="fas fa-trash"></i> Clear data
             </button>
           </div>
 
           <!-- chat card body -->
           <div class="card-body">
-            <div id="chat__room"></div>
+            <div class="row">
+              <div class="col-9">
+                <div id="chat__room"></div>
+              </div>
+              <div class="col-3">
+                <div id="chat__users_list"></div>
+              </div>
+            </div>
           </div>
 
           <!-- chat card footer -->
@@ -89,11 +96,43 @@
           </span>  
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-sm btn-outline-danger">
+          <button type="button" class="btn btn-sm btn-outline-danger" data-dismiss="modal">
             <i class="fas fa-times fa-lg"></i> Cancel
           </button>
           <button type="button" id="chat__clear_confirm_button" class="btn btn-sm btn-outline-success">
             <i class="fas fa-trash fa-lg"></i> Clear data
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal confirm user delete -->
+  <div class="modal fade" id="chat__delete_user_confirm" tabindex="-1" role="dialog" aria-labelledby="chat__delete_user_confirm_title" aria-hidden="false">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title text-danger" id="chat__delete_user_confirm_title">
+            <i class="fas fa-exclamation-triangle"></i> &nbsp;Are you sure?
+          </h4>
+        </div>
+        <div class="modal-body chat__user_delete_body">
+          <span class="chat__delete_user_content" style="text-decoration: underline;">
+            This action will delete user from chat room!
+          </span>
+          <br>
+          <div class="input-group input-group-sm">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> Reason </span>
+            </div>
+            <input type="text" class="form-control" id="chat__delete_user_reason" aria-label="Small" aria-describedby="chat__username_input" placeholder="Type a reason...">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-sm btn-outline-danger" data-dismiss="modal">
+            <i class="fas fa-times fa-lg"></i> Cancel
+          </button>
+          <button disabled type="button" id="chat__delete_user_button" class="btn btn-sm btn-outline-success">
+            <i class="fas fa-trash fa-lg"></i> Delete user
           </button>
         </div>
       </div>
@@ -108,7 +147,6 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
   <script src="javascripts/shards.min.js"></script>
-  <script src="javascripts/chat-elements.js"></script>
   <script src="javascripts/chat-socket.js"></script>
 </body>
 </html>
