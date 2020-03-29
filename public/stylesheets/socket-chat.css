@@ -1,0 +1,145 @@
+/* Global styles */
+
+body {
+  width: 100vw;
+  height: 100vh;
+  padding: 50px;
+  font-family: "Ubuntu", sans-serif!important;
+  font-size: 14px;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  font-family: inherit!important;
+}
+
+button {
+  cursor: pointer;
+}
+button[disabled]:hover {
+  cursor: no-drop;
+}
+
+ /* Card Styles */
+.card-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-header > .card-title {
+  margin-bottom: 0;
+  font-size: 1.5rem;
+}
+
+.card-header > button {
+  position: absolute;
+  right: 10px;
+  padding: .15rem .5rem;
+}
+
+.card-body {
+  min-height: 500px;
+  padding: 0;
+}
+
+.card-body > .row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.card-body div.col-9 {
+  padding: 0;
+}
+
+.card-body div #chat__room > p {
+  padding: 10px 0 10px 10px;
+  margin-bottom: 0!important;
+}
+
+.card-body div #chat__room > p.message:nth-child(even) {
+  background-color: #5a61690f;
+}
+
+.card-body div #chat__room > p.message:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.card-body div.col-3 {
+  min-height: 510px;
+  border-left: 1px solid #5a616930;
+}
+.card-body div.col-3 {
+  padding: 10px;
+}
+.card-body div.col-3 #chat__users_list > p {
+  padding: 0;
+  margin: 0!important;
+}
+
+span.chat__delete_user {
+  cursor: pointer;
+}
+
+.card-footer {
+  padding: 0;
+  border-radius: 0 0 .625rem .625rem;
+}
+
+.card-footer > #chat__feedback {
+  position: absolute;
+  bottom: 35px;
+}
+.card-footer #chat__feedback > #chat__feedback_msg{
+  padding: 5px 15px;
+  margin: 0;
+}
+.card-footer .input-group-sm {
+  display: flex;
+  flex-direction: row;
+}
+
+.card-footer div > input {
+  border-top-right-radius: 0!important;
+  border-bottom-right-radius: 0!important;
+}
+.card-footer .input-group-sm > .input-group-append {
+  background-color: #ffffff;
+}
+
+.card-footer .input-group-sm .input-group-append > button {
+  border-top-left-radius: 0!important;
+  border-bottom-left-radius: 0!important;
+}
+
+/* Modal Styles */
+
+.modal-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: rgba(90,97,105,.06);
+}
+
+#chat__clear_confirm_title {
+  font-weight: bold;
+}
+
+.chat__clear_content {
+  font-size: .95rem;
+  text-decoration: underline;
+}
+
+.chat__user_delete_body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.chat__delete_user_content {
+  text-align: center;
+}
