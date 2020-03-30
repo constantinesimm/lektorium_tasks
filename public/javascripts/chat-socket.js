@@ -1,6 +1,6 @@
 (function() {
     //make connection
-    const socket = io.connect(`${document.location.host}`);
+    const socket = io.connect(`${document.location.hostname}:3000`);
 
     //buttons and inputs
     const chatStorage = localStorage.getItem('chat');
