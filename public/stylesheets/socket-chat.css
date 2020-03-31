@@ -55,6 +55,11 @@ button[disabled]:hover {
 .card-body div.col-sm-9 {
   padding: 0;
 }
+.card-body div > #chat__room {
+  overflow-x: unset;
+  overflow-y: scroll;
+  max-height: 300px;
+}
 
 .card-body div #chat__room > p {
   padding: 10px 0 10px 10px;
@@ -141,6 +146,9 @@ span.chat__delete_user {
 
   .card-body div.col-sm-3 > #chat__users_list {
     padding: 0 10px;
+    margin-bottom: inherit;
+    max-height: 75px;
+    overflow-y: scroll;
   }
 }
 /* Modal Styles */
