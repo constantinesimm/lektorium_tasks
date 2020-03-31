@@ -13,7 +13,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('*', (req, res) => res.sendFile('index.html', { root: 'public' }));
 
 //socket chat
-require('./modules/chat/chat')(app);
+require('./modules/chat/chat')();
 
 //catch 404 and forward to central error handler
 app.use('*', (req, res, next) => {
