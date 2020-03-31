@@ -18,9 +18,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.get('*', (req, res) => res.sendFile('index.html', { root: 'public' }));
 
-//socket task3
-require('./modules/task3/chat')(app);
-
 //task 4
 app.use('task4', require('./modules/task4/route'));
 

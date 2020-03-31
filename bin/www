@@ -30,6 +30,11 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 /**
+ * Listen chat, on Socket interface
+ */
+require('../modules/task3/chat')(server);
+
+/**
  * Normalize a port into a number, string, or false.
  */
 

@@ -12,29 +12,31 @@
   <link rel="stylesheet" href="stylesheets/shards.min.css">
   <link rel="stylesheet" href="stylesheets/socket-chat.css">
 </head>
-<body>
-  <div class="container-fluid">
+<body class="d-flex">
+  <div class="container align-self-center">
     <div class="row">
-      <div class="col-lg-5 mx-auto">
+      <div class="col-xs-12 col-lg-5 mx-auto">
         <div class="card">
 
           <!-- task3 card header -->
           <div class="card-header d-flex flex-row">
             <div class="card-title text-primary">
-              <i class="far fa-comments"></i> Simple Chat with Socket.io
+              <i class="far fa-comments"></i> Simple chat
             </div>
             <button id="chat__clear_data" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#chat__clear_confirm">
-              <i class="fas fa-trash"></i> Clear data
+              <i class="fas fa-trash"></i>
             </button>
           </div>
 
           <!-- task3 card body -->
           <div class="card-body">
             <div class="row">
-              <div class="col-9">
+              <div class="col-sm-9">
+                <div class="d-sm-block d-md-none text-center">Users messages</div>
                 <div id="chat__room"></div>
               </div>
-              <div class="col-3">
+              <div class="col-sm-3">
+                <div class="d-sm-block d-md-none text-center">Users list</div>
                 <div id="chat__users_list"></div>
               </div>
             </div>
@@ -142,7 +144,7 @@
   <!-- Optional JavaScript -->
   <!-- JavaScript Dependencies: FontAwesome, jQuery, Popper.js, Bootstrap JS, Shards JS -->
   <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
