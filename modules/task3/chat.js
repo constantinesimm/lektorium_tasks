@@ -1,6 +1,5 @@
-module.exports = (app) => {
-  const server = app.listen(3003);
-  const io = require('socket.io')(server);
+module.exports = () => {
+  const io = require('socket.io').listen(process.env.port || 3003);
 
   let usersList = [];
 
