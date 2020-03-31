@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="stylesheets/socket-chat.css">
 </head>
 <body class="d-flex">
-  <div class="container align-self-center" style="padding-right: 0; padding-left: 0">
+  <div class="container align-self-center">
     <div class="row">
       <div class="col-xs-12 col-lg-5 mx-auto">
         <div class="card">
@@ -31,10 +31,12 @@
           <!-- chat card body -->
           <div class="card-body">
             <div class="row">
-              <div class="col-9">
+              <div class="col-sm-9">
+                <div class="d-sm-block d-md-none text-center">Users messages</div>
                 <div id="chat__room"></div>
               </div>
-              <div class="col-3">
+              <div class="col-sm-3">
+                <div class="d-sm-block d-md-none text-center">Users list</div>
                 <div id="chat__users_list"></div>
               </div>
             </div>

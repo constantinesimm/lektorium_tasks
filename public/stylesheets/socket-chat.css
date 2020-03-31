@@ -42,16 +42,17 @@ button[disabled]:hover {
 }
 
 .card-body {
-  min-height: 500px;
+  min-height: 250px;
   padding: 0;
 }
 
 .card-body > .row {
   margin-right: 0;
   margin-left: 0;
+  min-height: inherit;
 }
 
-.card-body div.col-9 {
+.card-body div.col-sm-9 {
   padding: 0;
 }
 
@@ -68,14 +69,14 @@ button[disabled]:hover {
   background-color: #ffffff;
 }
 
-.card-body div.col-3 {
-  min-height: 510px;
+.card-body div.col-sm-3 {
+  min-height: auto;
   border-left: 1px solid #5a616930;
 }
-.card-body div.col-3 {
+.card-body div.col-sm-3 {
   padding: 10px;
 }
-.card-body div.col-3 #chat__users_list > p {
+.card-body div.col-sm-3 #chat__users_list > p {
   padding: 0;
   margin: 0!important;
 }
@@ -115,6 +116,33 @@ span.chat__delete_user {
   border-bottom-left-radius: 0!important;
 }
 
+@media (max-width: 575px) {
+  .card-body div.col-sm-9 {
+    margin-bottom: 10px;
+  }
+
+  .card-body div.col-sm-9 > .d-sm-block {
+    padding: 10px 0;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #5a616930;
+    font-weight: bold;
+  }
+  .card-body div.col-sm-3 {
+    padding: unset;
+    margin-bottom: 15px;
+    border-top: 1px solid #5a616930;
+  }
+
+  .card-body div.col-sm-3 > .d-sm-block {
+    padding-bottom: 0;
+    margin: 10px 0 5px 0;
+    font-weight: bold;
+  }
+
+  .card-body div.col-sm-3 > #chat__users_list {
+    padding: 0 10px;
+  }
+}
 /* Modal Styles */
 
 .modal-header {
