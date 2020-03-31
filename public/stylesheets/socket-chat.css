@@ -141,6 +141,7 @@ span.chat__delete_user {
 
   .card-body div.col-sm-3 > #chat__users_list {
     padding: 0 10px;
+    margin-bottom: inherit;
   }
 }
 /* Modal Styles */
