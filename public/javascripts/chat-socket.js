@@ -1,6 +1,6 @@
 (function() {
     //make connection
-    const socket = io.connect(`${document.location.hostname}:${process.env.port || '3003'}`);
+    const socket = io.connect(window.location.host);
 
     //buttons and inputs
     const chatStorage = localStorage.getItem('chat');
@@ -44,13 +44,6 @@
     //Listen on typing
     socket.on('typing', (data) => feedback.html(`<p id="chat__feedback_msg"><i> ${ data.username } is typing a message...</i></p>`))
 
-    //Listen after user delete
-    socket.on('after_delete', (data) => {
-        feedback.html(`<p id="chat__feedback_msg">Admin deleted user "${ data['user'] }" with reason: <i>${ data['reason'] }</i></p>`);
-
-        setTimeout(() => feedback.html(''), 3000);
-    });
-
     //Listen on user disconnected
     socket.on('user_disconnected', (data) => {
         usersList.html('');
@@ -62,6 +55,14 @@
     });
 
     if (chatStorage) {
+        //Listen on user delete
+        socket.on(JSON.parse(chatStorage).username + '_delete', (data) => {
+            console.log('delete event - ', data);
+            localStorage.removeItem('chat');
+
+            setTimeout(() => window.location.reload(), 2000)
+        });
+
         //Listen admin event
         socket.on(JSON.parse(chatStorage).username, (data) => {
             usersList.html('');
@@ -71,14 +72,13 @@
 
             $('#chat__username').html(`<span class="badge badge-success">Admin</span> ${ data['users'][0] }`)
         });
-
-        //Listen on user delete
-        socket.on(`${ JSON.parse(chatStorage).username }_delete`, () => {
-            localStorage.removeItem('chat');
-
-            document.location.reload();
-        });
     }
+
+    //Listen after user delete
+    socket.on('after_delete', (data) => {
+        feedback.html(`<p id="chat__feedback_msg">Admin deleted user "${ data['user'] }" with reason: <i>${ data['reason'] }</i></p>`);
+        feedback.html('');
+    });
 
     document.addEventListener('DOMContentLoaded', () => {
         const usernameRegisterModal = document.getElementById('chat__username_signup');
@@ -124,11 +124,12 @@
                 document.getElementById('chat__delete_user_reason').oninput = event => event.target.value.length > 0 ? document.getElementById('chat__delete_user_button').removeAttribute('disabled') : document.getElementById('chat__delete_user_button').setAttribute('disabled', 'disabled');
 
                 document.getElementById('chat__delete_user_button').onclick = () => {
-                    socket.emit('user_delete', { user: username, reason:  $('#chat__delete_user_reason').val() });
+                    document.getElementById('chat__delete_user_reason').value = '';
+                    document.getElementById('chat__delete_user_button').setAttribute('disabled', 'disabled');
                     $('#chat__delete_user_confirm').modal('hide');
-                    $('#chat__delete_user_reason').val('');
-
                     userRecord.remove();
+
+                    socket.emit('user_delete', { user: username, reason:  $('#chat__delete_user_reason').val() });
                 };
             }
         };
