@@ -35,7 +35,11 @@
     socket.on('new_message', (data) => {
         feedback.html('');
         message.val('');
-        chatroom.append(`<p class="message"><span class="badge badge-primary mr-1">${ data.username }</span> ${ data.message }</p>`)
+        chatroom.append(`<p class="message"><span style="font-size: .8rem;text-decoration: underline">${ new Date().toLocaleTimeString() }</span> <span class="badge badge-primary mr-1" style="font-size: 1rem; font-weight: bold">${ data.username }</span>: ${ data.message }</p>`)
+
+        chatroom.on('DOMSubtreeModified', function() {
+            chatroom.animate({scrollTop: chatroom.prop("scrollHeight")}, 500);
+        });
     });
 
     //Emit typing
