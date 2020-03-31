@@ -36,9 +36,9 @@ module.exports = (server) => {
 
         socket.on('user_delete', (data) => {
             usersList.splice(usersList.indexOf(data['user']), 1);
-            socket.broadcast.emit('user_disconnected', { users: usersList });
-            io.sockets.emit('after_delete', { user: data['user'], reason: data['reason'] });
-            io.sockets.emit(data['user'] +'_delete', data['user']);
+            socket.broadcast.emit('user_disconnected', {users: usersList});
+            io.sockets.emit('after_delete', {user: data['user'], reason: data['reason']});
+            io.sockets.emit(data['user'] + '_delete', data['user']);
         });
 
         socket.on('disconnected', (user) => {

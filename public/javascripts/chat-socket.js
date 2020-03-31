@@ -3,7 +3,7 @@
     const socket = io.connect(window.location.host);
 
     //buttons and inputs
-    const chatStorage = localStorage.getItem('chat');
+    const chatStorage = localStorage.getItem('task3');
     const usernameRegisterButton = $('#chat__username_save');
     const message = $('#chat__message_input');
     const send_message = $('#chat__message_send');
@@ -11,7 +11,7 @@
     const feedback = $('#chat__feedback');
     const usersList = $('#chat__users_list');
 
-    //checking chat storage
+    //checking task3 storage
     if (!chatStorage) {
         usernameRegisterButton.click(() => socket.emit('username_register', { username : $('#chat__username_input').val() }));
     } else {
@@ -72,6 +72,13 @@
 
             $('#chat__username').html(`<span class="badge badge-success">Admin</span> ${ data['users'][0] }`)
         });
+
+        //Listen on user delete
+        socket.on(`${ JSON.parse(chatStorage).username }_delete`, () => {
+            localStorage.removeItem('task3');
+
+            document.location.reload();
+        });
     }
 
     //Listen after user delete
@@ -87,14 +94,14 @@
 
         //remove all data and reload page
         document.getElementById('chat__clear_confirm_button').onclick = () => {
-            socket.emit('disconnected', JSON.parse(localStorage.getItem('chat')).username);
-            localStorage.removeItem('chat');
+            socket.emit('disconnected', JSON.parse(localStorage.getItem('task3')).username);
+            localStorage.removeItem('task3');
 
             document.location.reload();
         };
 
         //check for username register
-        if (!localStorage.getItem('chat') || !JSON.parse(localStorage.getItem('chat')).register) {
+        if (!localStorage.getItem('task3') || !JSON.parse(localStorage.getItem('task3')).register) {
             //show username register modal
             $(usernameRegisterModal).modal({ backdrop: 'static'}, 'show');
 
@@ -103,7 +110,7 @@
 
             usernameRegisterButton.onclick = () => {
                 //save storage value
-                localStorage.setItem('chat', JSON.stringify({ register: true, username: usernameRegisterInput.value }))
+                localStorage.setItem('task3', JSON.stringify({ register: true, username: usernameRegisterInput.value }))
 
                 //hide modal
                 $(usernameRegisterModal).modal('hide');
