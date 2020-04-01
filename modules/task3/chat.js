@@ -1,58 +1,57 @@
-const socketIO = require('socket.io');
-
 module.exports = (server) => {
-    let usersList = [];
-    const io = socketIO(server);
+  const io = require('socket.io')(server);
 
-    io.on('connection', socket => {
-        socket.username = 'Anonymous';
+  let usersList = [];
 
-        socket.on('username_register', (data) => {
-            socket.username = data.username;
+  io.on('connection', socket => {
+      socket.username = 'Anonymous';
 
-            //add user to list
-            if (!usersList.includes(socket.username)) {
-                usersList.push(socket.username);
-            }
+      socket.on('username_register', (data) => {
+          socket.username = data.username;
 
-            //send user connected event
-            io.sockets.emit('user_connected', {users: usersList});
+          //add user to list
+          if (!usersList.includes(socket.username)) {
+              usersList.push(socket.username);
+          }
 
-            //set current admin on connected
-            if (usersList.length) {
-                socket.admin = usersList[0];
-            }
+          //send user connected event
+          io.sockets.emit('user_connected', { users: usersList });
 
-            //send event to current admin
-            io.sockets.emit(socket.admin, {users: usersList});
-        });
+          //set current admin on connected
+          if (usersList.length) {
+              socket.admin = usersList[0];
+          }
 
-        socket.on('new_message', (data) => {
-            //broadcast new message
-            io.sockets.emit('new_message', {message: data.message, username: socket.username})
-        });
+          //send event to current admin
+          io.sockets.emit(socket.admin, { users: usersList });
+      });
 
-        socket.on('typing', () => socket.broadcast.emit('typing', {username: socket.username}));
+      socket.on('new_message', (data) => {
+          //broadcast new message
+          io.sockets.emit('new_message', { message: data.message, username: socket.username })
+      });
 
-        socket.on('user_delete', (data) => {
-            usersList.splice(usersList.indexOf(data['user']), 1);
-            socket.broadcast.emit('user_disconnected', {users: usersList});
-            io.sockets.emit('after_delete', {user: data['user'], reason: data['reason']});
-            io.sockets.emit(data['user'] + '_delete', data['user']);
-        });
+      socket.on('typing', () => socket.broadcast.emit('typing', { username: socket.username }));
 
-        socket.on('disconnected', (user) => {
-            //change admin
-            if (usersList.indexOf(user) === 0) {
-                usersList.splice(usersList.indexOf(user), 1);
-                socket.admin = usersList[0];
+      socket.on('user_delete', (data) => {
+          usersList.splice(usersList.indexOf(data['user']), 1);
+          socket.broadcast.emit('user_disconnected', { users: usersList });
+          io.sockets.emit(`${ data['user']}_delete`);
+          io.sockets.emit('after_delete', { user: data['user'], reason: data['reason'] });
+      });
 
-                io.sockets.emit(socket.admin, {users: usersList});
-            } else {
-                usersList.splice(usersList.indexOf(user), 1);
-            }
+      socket.on('disconnected', (user) => {
+          //change admin
+          if (usersList.indexOf(user) === 0) {
+              usersList.splice(usersList.indexOf(user), 1);
+              socket.admin = usersList[0];
 
-            socket.broadcast.emit('user_disconnected', {users: usersList});
-        })
-    });
+              io.sockets.emit(socket.admin, { users: usersList });
+          } else {
+              usersList.splice(usersList.indexOf(user), 1);
+          }
+
+          socket.broadcast.emit('user_disconnected', { users: usersList });
+      })
+  });
 };
