@@ -4,6 +4,9 @@ const Schema = mongoose.Schema;
 const personalInfo = new Schema({
     userNumb: String,
     personalInfo: {
+        firstName: String,
+        familyName: String,
+        lastName: String,
         givenName: String,
         surname: String,
         gender: String,
@@ -28,11 +31,13 @@ const personalInfo = new Schema({
     },
     evolution: {
         hobbies: [{
+            _id: false,
             name: String,
             timeStarted: String,
             isKeepOnDoing: Boolean
         }],
         courses: [{
+            _id: false,
             name: String,
             timeStarted: String,
             timeEnd: String,
@@ -40,6 +45,7 @@ const personalInfo = new Schema({
             doYouLikeIt: Boolean
         }],
         skills: [{
+            _id: false,
             name: String,
             level: String,
             improvements: String

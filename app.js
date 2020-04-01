@@ -11,7 +11,7 @@ mongoDatabase()
     .catch( error => console.log(error) );
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 //static path and files
@@ -19,24 +19,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('*', (req, res) => res.sendFile('index.html', { root: 'public' }));
 
 //task 4
-app.use('task4', require('./modules/task4/route'));
+app.use('/task4', require('./modules/task4/route'));
 
-//catch 404 and forward to central error handler
-app.use('*', (req, res, next) => {
-   if (res.status(404)) {
-       next(404);
-   }
+app.use((req, res, next) => {
+    const err = new Error(`Not Found ${req.path}`);
+    err.status = 404;
+    next(err)
+})
+
+app.use((error, req, res, next) => {
+    if (error.status) {
+        res.status(error.status).json({message: error.message})
+    }
+    if (error.errors) {
+        return res.status(400).json({
+            error: {
+                name: error.name,
+                errors: error.errors
+            }
+        })
+    }
+    next(error);
 });
-
-//central error handler
-app.use((error, req, res) => {
-    let statusCode = error || 500;
-    let statusMsg = {
-        404: 'Not found',
-        500: 'Server Internal Error'
-    };
-
-    return res.status(statusCode).end(statusCode === error ? statusMsg['404'] : statusMsg['500']);
-});
-
 module.exports = app;

@@ -1,5 +1,4 @@
-module.exports = (app) => {
-  const server = app.listen(3003);
+module.exports = (server) => {
   const io = require('socket.io')(server);
 
   let usersList = [];

@@ -4,7 +4,8 @@ const {uri, options} = {
     uri: 'mongodb://127.0.0.1:27017/tasks',
     options: {
         useUnifiedTopology: true,
-        useNewUrlParser: true
+        useNewUrlParser: true,
+        useFindAndModify: false
     }
 };
 
