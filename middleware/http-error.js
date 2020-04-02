@@ -1,5 +1,5 @@
-class handleError extends Error {
-    constructor(msg = 'Internal Server Error', status = 500) {
+class HttpError extends Error {
+    constructor(status = 500, msg = 'Internal Server Error') {
         super(msg);
         this.status = status;
     }
@@ -12,4 +12,4 @@ class handleError extends Error {
     }
 }
 
-module.exports = handleError;
+module.exports = HttpError;
