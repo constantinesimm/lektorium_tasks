@@ -19,10 +19,16 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.get('*', (req, res) => res.sendFile('index.html', { root: 'public' }));
 
+//service route
+app.use('/app', require('./services/secure/router'));
+
+
+//task 1
+app.use('/task1', require('./modules/task1/router'));
+
 //task 4
 app.use('/task4', accessMiddleware, require('./modules/task4/router'));
 
-app.use('/app', require('./services/secure/router'));
 
 //catch 404 error
 app.use((req, res, next) => {
